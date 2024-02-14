@@ -8,6 +8,9 @@ TagManager:
   - crystal
   - Enemy
   - Default
+  - Nextlevel
+  - Previouslevel
+  - FinalLevel
   layers:
   - Default
   - TransparentFX

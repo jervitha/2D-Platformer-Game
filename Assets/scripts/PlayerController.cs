@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -90,6 +91,20 @@ public class NewBehaviourScript : MonoBehaviour
             score += 1;
             scoretext.text = "score: " + score;
             collision.gameObject.SetActive(false);
+        }
+        else if(collision.tag=="Nextlevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            respawnPoint = transform.position;
+        }
+        else if (collision.tag == "Previouslevel")
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            respawnPoint = transform.position;
+        }
+        else if (collision.tag == "FinalLevel")
+        {
+            SceneManager.LoadScene(6);
         }
     }
     public void MoveCharacter(float horizontal)
