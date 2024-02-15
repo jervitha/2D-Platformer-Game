@@ -22,6 +22,7 @@ public class NewBehaviourScript : MonoBehaviour
     public GameOverController gameOverController;
  //   public ScoreController scoreController;
     public Text scoretext;
+    [SerializeField] AudioSource AudioSource;
 
   //public static  void PickUpKey()
     //{
@@ -48,6 +49,7 @@ public class NewBehaviourScript : MonoBehaviour
     public void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        AudioSource = GetComponent<AudioSource>();
         boxColInitSize = boxCol.size;
         boxColInitOffset = boxCol.offset;
         respawnPoint = transform.position;
@@ -96,15 +98,19 @@ public class NewBehaviourScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             respawnPoint = transform.position;
+            AudioSource.Play();
+
         }
         else if (collision.tag == "Previouslevel")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             respawnPoint = transform.position;
+            AudioSource.Play();
         }
         else if (collision.tag == "FinalLevel")
         {
             SceneManager.LoadScene(6);
+            AudioSource.Play();
         }
     }
     public void MoveCharacter(float horizontal)
@@ -113,6 +119,7 @@ public class NewBehaviourScript : MonoBehaviour
         Vector3 position = transform.position;
         position.x = position.x + horizontal * speed * Time.deltaTime;
         transform.position = position;
+     
         //vertical movement
        // player.AddForce(new Vector2(0f, jumpSpeed), ForceMode2D.Force);
     }
@@ -125,10 +132,12 @@ public class NewBehaviourScript : MonoBehaviour
         {
 
             scale.x = -1f * Mathf.Abs(scale.x);
+            AudioSource.Play();
         }
         else if (horizontal > 0)
         {
             scale.x = Mathf.Abs(scale.x);
+            AudioSource.Play();
         }
         transform.localScale = scale;
        // float vertical = Input.GetAxisRaw("Jump");
