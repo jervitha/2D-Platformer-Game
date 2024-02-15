@@ -29,7 +29,8 @@ public class PlayerHealth : MonoBehaviour
             playersr.enabled = false;
             playerMovement.enabled = false;
             gameManager.gameOver();
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene(7);
+            SoundManager.Instance.PlayMusic(Sounds.PlayerDeath);
         }
     }
    // private void ReloadLevel()
