@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class LevelMenu : MonoBehaviour
 {
     public Button[] button;
+    public GameObject levelbuttons;
     private void Awake()
     {
-
+       
         int unlockedlevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
         for (int i=0;i<button.Length;i++)
         {
@@ -24,6 +25,7 @@ public class LevelMenu : MonoBehaviour
         }
 
     }
+   
 
     // Start is called before the first frame update
     public void OpenLevel(int levelid)

@@ -11,6 +11,8 @@ TagManager:
   - Nextlevel
   - Previouslevel
   - FinalLevel
+  - Weakpoint
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

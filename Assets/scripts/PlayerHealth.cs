@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour
     public SpriteRenderer playersr;
     public NewBehaviourScript playerMovement;
     private bool isDead;
+    [SerializeField] private ParticleSystem testparticlesystem = default;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,17 +23,27 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-      //  ReloadLevel();//AS OF NOW
-        if (health<=0 && !isDead)
+        //  ReloadLevel();//AS OF NOW
+        if (health <= 0 && !isDead)
         {
             isDead = true;
             playersr.enabled = false;
             playerMovement.enabled = false;
-            gameManager.gameOver();
+            StartCoroutine(DeathSequence());
+        }
+
+    }
+
+    private IEnumerator DeathSequence()
+    {
+        testparticlesystem.Play();
+        yield return new WaitForSeconds(testparticlesystem.main.duration);
+        gameManager.gameOver();
             SceneManager.LoadScene(7);
             SoundManager.Instance.PlayMusic(Sounds.PlayerDeath);
+          
         }
-    }
+    
    // private void ReloadLevel()
     //{
       //  SceneManager.LoadScene(0);

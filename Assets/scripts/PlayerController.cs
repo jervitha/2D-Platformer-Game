@@ -24,12 +24,15 @@ public class NewBehaviourScript : MonoBehaviour
     public Text scoretext;
     [SerializeField] AudioSource AudioSource;
 
-  //public static  void PickUpKey()
+    //public static  void PickUpKey()
     //{
-      //  throw new NotImplementedException();
-        //Debug.Log("player picked up the key");
+    //  throw new NotImplementedException();
+    //Debug.Log("player picked up the key");
     //    ScoreContro
-//    }
+    //    }
+
+    [SerializeField] private int maxjumps = 2;
+    private int _jumpsleft;
 
     private bool isTouchingGround;
     private Vector3 respawnPoint;
@@ -50,6 +53,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         AudioSource = GetComponent<AudioSource>();
+        _jumpsleft = maxjumps;
         boxColInitSize = boxCol.size;
         boxColInitOffset = boxCol.offset;
         respawnPoint = transform.position;
@@ -65,9 +69,19 @@ public class NewBehaviourScript : MonoBehaviour
         float VerticalInput = Input.GetAxisRaw("Jump");
         isTouchingGround = Physics2D.OverlapCircle(groundCheck.position,groundCheckRadius,groundLayer);
         MoveCharacter(horizontal);
+        if(isTouchingGround && player.velocity.y<=0)
+        {
+            _jumpsleft = maxjumps;
+        }
         if (Input.GetButtonDown("Jump")&& isTouchingGround)
         {
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+        }
+        PlayJumpAnimation(VerticalInput);
+        if (Input.GetButtonDown("Jump") && isTouchingGround && _jumpsleft>0)
+        {
+            player.velocity = new Vector2(player.velocity.x, jumpSpeed);
+            _jumpsleft -= 1;
         }
         PlayJumpAnimation(VerticalInput);
         if (Input.GetKey(KeyCode.LeftControl))
@@ -88,6 +102,10 @@ public class NewBehaviourScript : MonoBehaviour
         {
             transform.position = respawnPoint;
         }
+        else if (collision.tag == "Checkpoint")
+        {
+            respawnPoint = transform.position;
+        }
         else if(collision.tag=="crystal")
         {
             score += 1;
@@ -98,16 +116,21 @@ public class NewBehaviourScript : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             respawnPoint = transform.position;
+            AudioSource.Play();
+
         }
         else if (collision.tag == "Previouslevel")
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             respawnPoint = transform.position;
+            AudioSource.Play();
         }
         else if (collision.tag == "FinalLevel")
         {
             SceneManager.LoadScene(6);
+            AudioSource.Play();
         }
+       
     }
     public void MoveCharacter(float horizontal)
     {
