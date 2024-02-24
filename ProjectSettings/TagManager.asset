@@ -3,16 +3,25 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - FallDetector
+  - crystal
+  - Enemy
+  - Default
+  - Nextlevel
+  - Previouslevel
+  - FinalLevel
+  - Weakpoint
+  - Checkpoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - player
   - Water
   - UI
-  - 
-  - 
+  - platform
+  - Enemy
   - 
   - 
   - 
@@ -38,6 +47,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1846818237
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 3766113349
     locked: 0
