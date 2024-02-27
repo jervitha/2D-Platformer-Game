@@ -6,12 +6,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth, currentHealth;
-    public float invisiblityLength = 1f;
-    private float invisiblityCounter;
-    public SpriteRenderer theSR;
-    public Color normalcolor, fadecolor;
-    private CharcterController thePlayer;
+ [SerializeField] private int maxHealth, currentHealth;
+ [SerializeField] private float invisiblityLength = 1f;
+  private float invisiblityCounter;
+ [SerializeField] private SpriteRenderer theSR;
+ [SerializeField] private Color normalcolor, fadecolor;
+ private CharcterController thePlayer;
 
     public static PlayerHealth instance;
     private void Awake()
@@ -23,6 +23,14 @@ public class PlayerHealth : MonoBehaviour
         thePlayer = GetComponent<CharcterController>();
         currentHealth = maxHealth;
         UIController.instance.UpdateHealthDisplay(currentHealth, maxHealth);
+    }
+    public int CurrentHealth
+    {
+        get { return currentHealth; }
+    }
+    public int MaxHealth
+    {
+        get { return maxHealth; }
     }
     private void Update()
     {

@@ -5,27 +5,28 @@ using UnityEngine;
 public class CharcterController : MonoBehaviour
 {
   
-    public float speed;
-    public Rigidbody2D theRB;
-    public float jumpForce;
-    public float runSpeed;
-    private float activeSpeed;
-
-    private bool isGrounded;
-    public Transform groundCheckPoint;
-    public float groundCheckRadius;
-    public LayerMask whatIsGround;
-    private bool canDoubleJump;
-    public Animator anim;
-    public float knockbackSpeed, knockbackLength;
-    private float knockbackCounter;
-
-    void Start()
+ [SerializeField]private float speed;
+ [SerializeField] private Rigidbody2D theRB;
+ [SerializeField] private float jumpForce;
+ [SerializeField] private float runSpeed;
+ private float activeSpeed;
+ private bool isGrounded;
+ [SerializeField]private Transform groundCheckPoint;
+ [SerializeField] private float groundCheckRadius;
+ [SerializeField] private LayerMask whatIsGround;
+ private bool canDoubleJump;
+ public Animator anim;
+ [SerializeField] private float knockbackSpeed, knockbackLength;
+ private float knockbackCounter;
+ private const string JUMP = "Jump";
+ private const string SPEED = "speed";
+ private const string ISTOUCHINGGROUND = "isTouchingGround";
+ private const string ISKNOCKBACK = "isKnockBack";
+    public Rigidbody2D TheRB
     {
-        
+        get { return theRB; }
     }
 
-    
     void Update()
     {
         if (Time.timeScale > 0f)
@@ -74,8 +75,8 @@ public class CharcterController : MonoBehaviour
                 knockbackCounter -= Time.deltaTime;
                 theRB.velocity = new Vector2(knockbackSpeed * -transform.localScale.x, theRB.velocity.y);
             }
-            anim.SetFloat("speed", Mathf.Abs(theRB.velocity.x));
-            anim.SetBool("isTouchingGround", isGrounded);
+            anim.SetFloat(SPEED, Mathf.Abs(theRB.velocity.x));
+            anim.SetBool(ISTOUCHINGGROUND, isGrounded);
         }
  }
 
@@ -87,7 +88,7 @@ public class CharcterController : MonoBehaviour
     public void KnockBack()
     {
         theRB.velocity = new Vector2(0f, jumpForce * 0.5f);
-        anim.SetTrigger("isKnockBack");
+        anim.SetTrigger(ISKNOCKBACK);
         knockbackCounter = knockbackLength;
     }
 }

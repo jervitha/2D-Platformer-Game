@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
 {
-    public float speed = 8f;
+   [SerializeField] private float speed = 8f;
     private Vector3 direction;
-    public float lifeTime=3f;
+   [SerializeField]  private float lifeTime = 3f;
 
-   
+
     void Start()
     {
         direction = (PlayerHealth.instance.transform.position - transform.position).normalized;
@@ -22,7 +22,8 @@ public class BossProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+    
+        if (other.gameObject.GetComponent<CharcterController>() != null)
         {
             PlayerHealth.instance.DamagePlayer();
             Destroy(gameObject);

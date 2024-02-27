@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Parallex : MonoBehaviour
 {
-    // Start is called before the first frame update
     private Transform theCam;
-    public Transform sky, plants;
+   [SerializeField]private Transform sky, plants;
     [Range(0f,1f)]
-    public float parallexSpeed;
+    [SerializeField]private float parallexSpeed;
 
     private void Start()
     {

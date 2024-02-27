@@ -1,68 +1,93 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
     public static AudioManager instance;
+    public static AudioManager Instance { get { return instance; } }
+    public SoundType[] sounds;
+   [SerializeField]private AudioSource soundEffect;
+   [SerializeField]private AudioSource soundMusic;
+   [SerializeField]private bool isMute = false;
+   [SerializeField]private float volume = 1f;
 
     private void Awake()
     {
         if (instance == null)
         {
-           
-            SetupAudioManager();
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else 
+    }
+    private void Start()
+    {
+        SetVolume(0.5f);
+        PlayMusic(Sounds.Music);
+    }
+    public void Mute(bool status)
+    {
+        isMute = status;
+    }
+    public void SetVolume(float Volume)
+    {
+        volume = Volume;
+        soundEffect.volume = volume;
+        soundMusic.volume = volume;
+    }
+    public void PlayMusic(Sounds sound)
+    {
+        if (isMute)
+            return;
+
+        AudioClip clip = getSoundClip(sound);
+        if (clip != null)
         {
-            Destroy(gameObject);
+            soundMusic.clip = clip;
+            soundMusic.Play();
         }
-    }
-                                
-   
-    public AudioSource menuMusic, bossMusic, levelVictoryMusic;
-    public AudioSource[] levelTracks;                                   
-
-    public void SetupAudioManager()
-    {
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-
-    public void StopMusic()
-    {
-        menuMusic.Stop();
-        bossMusic.Stop();
-        levelVictoryMusic.Stop();
-
-
-        foreach(AudioSource track in levelTracks)
+        else
         {
-            track.Stop();
+            Debug.Log("clip not found");
         }
     }
-    public void PlayMenuMusic()
+    public void Play(Sounds sound)
     {
-        StopMusic();
-        menuMusic.Play();
-    }
-    public void BossMusic()
-    {
-        StopMusic();
-        bossMusic.Play();
-    }
-    public void LevelcompleteMusic()
-    {
-        StopMusic();
-        levelVictoryMusic.Play();
+        AudioClip clip = getSoundClip(sound);
+        if(clip!=null)
+        {
+            soundEffect.PlayOneShot(clip);
+        }
+        else
+        {
+            Debug.Log("clip not found");
+        }
+
     }
 
-    public void PlayLevelMusic(int trackToPlay)
+    private AudioClip getSoundClip(Sounds sound)
     {
-        StopMusic();
-        levelTracks[trackToPlay].Play();
+        SoundType item = Array.Find(sounds, i=> i.soundType == sound);
+        if(item!=null)
+            return item.audioClip;
+        return null;
+        
     }
-    
+}
+
+[Serializable]
+public class SoundType
+{
+    public Sounds soundType;
+    public AudioClip audioClip;
+}
+public enum Sounds
+{
+
+    ButtonClick,
+    Music,
+    PlayerMove,
+    Playerdeath,
+    EnemyDeath
 }

@@ -4,25 +4,32 @@ using UnityEngine;
 
 public class CheckPoints : MonoBehaviour
 {
-    public bool isActive;
+    
+    [SerializeField]private bool isActive;
     public Animator anim;
     [HideInInspector]
     public CheckpointManager cpMan;
-   
+    private const string CHECKPOINTACTIVE = "checkpointActive";
+
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag=="Player" && isActive==false)
+       if (other.gameObject.GetComponent<CharcterController>() != null && isActive==false)
         {
-            cpMan.SetActiveCheckPoint(this);
-            anim.SetBool("checkpointActive", true);
-            isActive = true;
+          if (cpMan != null)
+            {
+                cpMan.SetActiveCheckPoint(this);
+                anim.SetBool(CHECKPOINTACTIVE, true);
+                isActive = true;
+            }
           
         }
     }
     public void DeactivateCheckpoint()
     {
-        anim.SetBool("checkpointActive", false);
+        anim.SetBool(CHECKPOINTACTIVE, false);
         isActive = false;
     }
 }
+

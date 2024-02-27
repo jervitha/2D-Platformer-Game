@@ -5,34 +5,34 @@ using UnityEngine;
 public class LifeController : MonoBehaviour
 {
     public static LifeController instance;
+    [SerializeField] private GameObject playerGameObject; 
     private CharcterController thePlayer;
-    public float respawnDelay = 2f;
-    public int currentLives = 3;
-    public GameObject deathEffect;
+    [SerializeField] private float respawnDelay = 2f;
+    [SerializeField] private int currentLives = 3;
+    [SerializeField] private GameObject deathEffect;
 
     private void Awake()
     {
         instance = this;
     }
-    
+
     void Start()
     {
-        thePlayer = FindFirstObjectByType<CharcterController>();
+       
+        thePlayer = playerGameObject?.GetComponent<CharcterController>();
 
-        UpdateDisplay();
-    }
-
-  
-    void Update()
-    {
         
+        UpdateDisplay();
     }
 
     public void Respawn()
     {
+
+    
         thePlayer.gameObject.SetActive(false);
-        thePlayer.theRB.velocity=Vector2.zero;
+        thePlayer.TheRB.velocity = Vector2.zero;
         currentLives--;
+
         if (currentLives > 0)
         {
             StartCoroutine(RespawnCo());
@@ -50,19 +50,26 @@ public class LifeController : MonoBehaviour
     public IEnumerator RespawnCo()
     {
         yield return new WaitForSeconds(respawnDelay);
-        thePlayer.transform.position = FindFirstObjectByType<CheckpointManager>().respawnPoint;
-        PlayerHealth.instance.AddHealth(PlayerHealth.instance.maxHealth);
+        CheckpointManager checkpointManager = thePlayer.GetComponent<CheckpointManager>();
+
+        if (checkpointManager != null)
+        {
+            thePlayer.transform.position = checkpointManager.RespawnPoint;
+        }
+      
+
+        PlayerHealth.instance.AddHealth(PlayerHealth.instance.MaxHealth);
         thePlayer.gameObject.SetActive(true);
-        
+
     }
 
     public IEnumerator GameOverCo()
     {
         yield return new WaitForSeconds(respawnDelay);
-        if(UIController.instance!=null)
+        if (UIController.instance != null)
         {
             UIController.instance.ShowGameOver();
-          
+
         }
     }
 
@@ -79,4 +86,5 @@ public class LifeController : MonoBehaviour
             UIController.instance.UpdateLivesDisplay(currentLives);
         }
     }
+
 }

@@ -1051,6 +1051,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: soundMusic
+      value: 
+      objectReference: {fileID: 8233877798295367828}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: soundEffect
+      value: 
+      objectReference: {fileID: 8233877798295367829}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 88ac5fcaaded1224484b71c9811f8bb1, type: 3}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.data[1].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0651b56880a11ef45909b779443691aa, type: 3}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.data[1].soundType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.data[2].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 31b2284e8ab3f244182080ca7da474b7, type: 3}
+    - target: {fileID: 5507315749145694085, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+      propertyPath: sounds.Array.data[2].soundType
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8331481101432376952, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -1060,6 +1092,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+--- !u!82 &8233877798295367828 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4966185334488385777, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+  m_PrefabInstance: {fileID: 8233877798295367827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &8233877798295367829 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 322042437879444304, guid: b5d9c8099a9b74b1b8c17640f1a470e5, type: 3}
+  m_PrefabInstance: {fileID: 8233877798295367827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

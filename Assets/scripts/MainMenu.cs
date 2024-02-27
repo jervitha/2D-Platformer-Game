@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public string firstLevel;
+    
+   [SerializeField]private string firstLevel;
     void Start()
     {
-        AudioManager.instance.PlayMenuMusic();
+        
+        AudioManager.Instance.Play(Sounds.ButtonClick);
+
     }
 
     public void StartGame()

@@ -6,10 +6,11 @@ public class EnemyPatrol : MonoBehaviour
 {
     public Transform[] PatrolPoints;
     private int currentPoint;
-    public float moveSpeed;
-    public float timeAtPoints;
+   [SerializeField]private float moveSpeed;
+   [SerializeField]  private float timeAtPoints;
     private float waitCounter;
     private Animator anim;
+    private const string ISMOVING = "ismoving";
     void Start()
     {
         foreach(Transform t in PatrolPoints)
@@ -18,17 +19,16 @@ public class EnemyPatrol : MonoBehaviour
         }
         waitCounter = timeAtPoints;
         anim=GetComponent<Animator>();
-        anim.SetBool("ismoving", true);
+        anim.SetBool(ISMOVING, true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, PatrolPoints[currentPoint].position, moveSpeed*Time.deltaTime);
         if(Vector3.Distance(transform.position,PatrolPoints[currentPoint].position)<0.001f)
         {
             waitCounter -= Time.deltaTime;
-            anim.SetBool("ismoving", false);
+            anim.SetBool(ISMOVING, false);
             if (waitCounter <= 0)
             {
                 currentPoint++;
@@ -37,7 +37,7 @@ public class EnemyPatrol : MonoBehaviour
                     currentPoint = 0;
                 }
                 waitCounter = timeAtPoints;
-                anim.SetBool("ismoving", true);
+                anim.SetBool(ISMOVING, true);
                 if(transform.position.x<PatrolPoints[currentPoint].position.x)
                 {
                     transform.localScale = Vector3.one;

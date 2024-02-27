@@ -15,15 +15,16 @@ public class UIController : MonoBehaviour
         instance = this;
     }
     public Image[] heartIcons;
-    public Sprite heartFull, heartEmpty;
-    public TMP_Text livesText,collectiblesText;
-    public GameObject gameOverScreen;
-    public GameObject pauseScreen;
-    public string mainMenuScene;
-    public Image fadeScreen;
-    public float fadeSpeed;
-    public bool fadeToBlack;
-    public bool fadeFromBlack;
+ 
+  [SerializeField]private Sprite heartFull, heartEmpty;
+  [SerializeField]private TMP_Text livesText, collectiblesText;
+  [SerializeField] private GameObject gameOverScreen;
+  [SerializeField] private GameObject pauseScreen;
+  [SerializeField] private string mainMenuScene;
+  [SerializeField] private Image fadeScreen;
+  [SerializeField] private float fadeSpeed;
+  [SerializeField] private bool fadeToBlack;
+  [SerializeField] private bool fadeFromBlack;
 
 
     private void Start()

@@ -10,9 +10,8 @@ public class CollectiblesManager : MonoBehaviour
         instance = this;
     }
 
-    public int CollectiblesCount;
-
-    public int extraLifeThreshold;
+  [SerializeField] public int CollectiblesCount;
+  [SerializeField] private int extraLifeThreshold;
 
 
 

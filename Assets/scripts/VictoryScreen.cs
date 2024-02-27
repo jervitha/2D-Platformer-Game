@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class VictoryScreen : MonoBehaviour
 {
-    public string mainMenu;
+  
+    [SerializeField]private string mainMenu;
 
-    
+
     void Start()
     {
         PlayerPrefs.DeleteAll();

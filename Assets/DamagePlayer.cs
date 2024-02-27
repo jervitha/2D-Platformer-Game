@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class DamagePlayer : MonoBehaviour
 {
+    [SerializeField] private PlayerHealth healthController;
 
-    private PlayerHealth healthController;
-    private void Start()
-    {
-        healthController = FindFirstObjectByType<PlayerHealth>();
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        CharcterController playerController = other.gameObject.GetComponent<CharcterController>();
+
+        if (playerController != null && healthController != null)
         {
-            PlayerHealth.instance.DamagePlayer();
+            healthController.DamagePlayer();
+
         }
     }
-
 }

@@ -8,10 +8,14 @@ public class BossActivator : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
-        {
-            theBoss.ActivateBattle();
-            gameObject.SetActive(false);
-        }
+     
+     if (other.gameObject.GetComponent<CharcterController>() != null)
+         {
+           theBoss.ActivateBattle();
+           gameObject.SetActive(false);
+         }
+
     }
+
+    
 }

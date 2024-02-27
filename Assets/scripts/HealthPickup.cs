@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class HealthPickup : MonoBehaviour
 {
-    public int healthToAdd;
-    public GameObject pickupEffect;
+    [SerializeField] private int healthToAdd;
+    [SerializeField]  private GameObject pickupEffect;
+
+   
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Player"))
+        if(other.gameObject.GetComponent<CharcterController>() != null)
         {
-            if (PlayerHealth.instance.currentHealth != PlayerHealth.instance.maxHealth)
+            if (PlayerHealth.instance.CurrentHealth != PlayerHealth.instance.MaxHealth)
             {
                 PlayerHealth.instance.AddHealth(healthToAdd);
                 Destroy(gameObject);

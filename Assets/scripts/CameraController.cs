@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    public GameObject player;
-    public float offset;
-    public float offsetsmoothing;
+    [SerializeField]private GameObject player;
+    [SerializeField]private float offset;
+    [SerializeField] private float offsetsmoothing;
     private Vector3 playerposition;
    
     void LateUpdate()

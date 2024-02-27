@@ -5,8 +5,9 @@ using UnityEngine;
 public class TreelineMovement : MonoBehaviour
 
 {
-    public float maxDistance = 22f;
-   
+    
+ [SerializeField] public float maxDistance = 22f;
+
     void Update()
     {
         float distance = transform.position.x - Camera.main.transform.position.x;

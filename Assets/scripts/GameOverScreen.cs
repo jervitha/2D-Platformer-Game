@@ -6,6 +6,8 @@ public class GameOverScreen : MonoBehaviour
 {
     public void Setup()
     {
+        AudioManager.Instance.PlayMusic(Sounds.Playerdeath);
         gameObject.SetActive(true);
+
     }
 }

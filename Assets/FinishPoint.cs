@@ -8,14 +8,14 @@ public class FinishPoint : MonoBehaviour
 
 {
     private bool isEnding;
-    public string nextLevel;
-    public float waitToEnd = 2f;
-    public GameObject blocker;
-    public void OnTriggerEnter2D(Collider2D collision)
+   [SerializeField]private string nextLevel;
+   [SerializeField] private float waitToEnd = 2f;
+   [SerializeField] private GameObject blocker;
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (isEnding == false)
         {
-            if (collision.tag == "Player")
+          if (other.gameObject.GetComponent<CharcterController>() != null)
             {
                 isEnding = true;
                 blocker.SetActive(true);
